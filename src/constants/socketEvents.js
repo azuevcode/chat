@@ -1,4 +1,6 @@
-export const SERVER_CONNECTION = 'connection';
-export const CLIENT_CONNECTION = 'connect';
-export const MESSAGE_RECEIVED = 'message received';
-export const MESSAGE_SENT = 'message sent';
+module.exports = {
+    SERVER_CONNECTION: 'connection',
+    CLIENT_CONNECTION: 'connect',
+    MESSAGE_RECEIVED: 'message received',
+    MESSAGE_SENT: 'message sent'
+};

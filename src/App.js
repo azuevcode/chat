@@ -1,49 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8080');
+import { SOCKET_CONNECTION_URL } from './constants/client';
+import {
+  CLIENT_CONNECTION,
+  MESSAGE_RECEIVED,
+  MESSAGE_SENT,
+} from './constants/socketEvents';
+
+import AvatarArea from './components/AvatarArea';
+import MessageArea from './components/MessageArea';
+import { Typebar } from './components/ui';
+
+import { useAppStyles } from './styles';
+
+const socket = io(SOCKET_CONNECTION_URL);
 
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [typeValue, setTypeValue] = useState('');
+  const classes = useAppStyles();
 
   useEffect(() => {
-    socket.on('connect', () => {
+    socket.on(CLIENT_CONNECTION, () => {
       console.log('connected');
     });
   }, []);
 
   useEffect(() => {
-    socket.on('new message', (message) => {
+    socket.on(MESSAGE_RECEIVED, (message) => {
       const newMessages = [...messages, message];
       setMessages(newMessages);
     });
 
     return () => {
-      socket.off('new message');
+      socket.off(MESSAGE_RECEIVED);
     };
   }, [messages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!typeValue) return;
-    
-    socket.emit('message', typeValue);
+
+    socket.emit(MESSAGE_SENT, typeValue);
     setTypeValue('');
   }
 
   return (
-    <div>
-      <div>{messages.map(message => <div>{`${message}\n`}</div>)}</div>
-      <hr />
-      <form>
-        <input
-          placeholder='Type something...'
-          value={typeValue}
-          onChange={(e) => setTypeValue(e.target.value)}
-        />
-        <button onClick={handleSubmit}>Отправить сообщение</button>
-      </form>
+    <div className={classes.container}>
+      <AvatarArea />
+      <MessageArea messages={messages} />
+      <Typebar
+        buttonTitle='Отправить'
+        placeholder='Напишите сообщение...'
+        value={typeValue}
+        onChange={(e) => { setTypeValue(e.target.value); }}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };
