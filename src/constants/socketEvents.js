@@ -1,6 +1,7 @@
 module.exports = {
-    SERVER_CONNECTION: 'connection',
-    CLIENT_CONNECTION: 'connect',
-    MESSAGE_RECEIVED: 'message received',
-    MESSAGE_SENT: 'message sent'
+  SERVER_CONNECTION: 'connection',
+  CLIENT_CONNECTION: 'connect',
+  MESSAGE_RECEIVED: 'message received',
+  MESSAGE_SENT: 'message sent',
+  USER_JOIN: 'user join',
 };

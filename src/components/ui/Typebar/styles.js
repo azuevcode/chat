@@ -6,6 +6,7 @@ export const useStyles = makeStyles({
       margin: '10px 0',
       borderRadius: 17,
       padding: 5,
+      width: '100%',
     },
     input: {
       padding: '0 10px',

@@ -2,6 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { randomColor } from './utils';
 
 export const useAvatarAreaStyles = makeStyles({
+  avatarContainer: {
+    margin: '10px 0',
+  },
   avatar: {
     backgroundColor: '#3f51b5',
     width: 80,

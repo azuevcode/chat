@@ -8,7 +8,7 @@ const AvatarArea = () => {
   const classes = useAvatarAreaStyles();
 
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justify="space-between" alignItems="center" className={classes.avatarContainer}>
       <Avatar className={classes.avatar}>I</Avatar>
       <Avatar className={classes.avatar}>U</Avatar>
     </Grid>
